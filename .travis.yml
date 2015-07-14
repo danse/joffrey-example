@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+- '0.10'
+sudo: false
+cache:
+  directories:
+  - node_modules
+notifications:
+  email: false
+# See https://github.com/boennemann/semantic-release/issues/18
+before_deploy:
+- npm config set spin false --global
+env:
+  global:
+  -  secure: "cWDboNOV+WWJ/7iQo+zZPjSG9kDdWcNFb8DhgvqqgXndXjbmCrj67TZxjUSuMFH4EA+8Tei3/dQJaEcPMP0LzQF/2lDoaVUHH+tk/8lKecdyVBULhV/Xyl2mhh0y2FjnAnl9SaF07vCAiwMzcmgAKajzLl2lZ2YL9Wq+fCAAFY7d19bYsq76LuqCawDV1IlizAKSlr56SDTjnn7j4/845oRQmgyRkXNbULTNrCqwG+3pwiQSpR+9lwadOINE0WhpYy1A7s37lETer7bJuWVXNwgnF/3WQI9714t1Gq8KQhob/T+VGw1M8RwGBmInV8lYTSbYIDguEGQWYFHuXWga64isvO1mXRP2s4aatKBciyBaxgEo96tnUvoE0nTPf06B5xGBcA+LotVhw1feXPFn6SQnDd0vIMr84u2r+J9sBM/c8kZci5zM0S+OonZNLIoe5rz7ZvNnZjNab2tLqBYNRd+g6OOs0W+Xr8C7zBPdGn2DzVbtJqzleWTOXFOpOF4F2ibIVGHNMZ68NBeWHg21QLTwZUungeUrzVLrcdNmVibDbdDVQQy/XKhtiPKInnaFZfLE6qbqR1fw2unhhm6XaBILh6UyFvd5ZuHJz//1sUdDdEioM4iRJ7cXD03IXJUnTayqOoiio76bO98fUiTtuz3uvCSS8wv+mJCjeCBiJX4="
+deploy:
+  provider: npm
+  email: gregor@martynus.net
+  skip_cleanup: true
+  api_key:
+  - secure: "HwKd28x1zDcEYXsHabJ3qrJnoFjJ4lBF+EjJw+uTgtHEQbFDtpih8ODWgFR+TLzhsoBVSkP2cjbgzyce9rpySIvInRXtjXxclhIZOyiS+43rS5zw9I+fij7KvUDehgj2smcy+2PQ7sIa4K32It1YXHj167vnv0Tznjm2V7eegQMe3KAG47qmjWCmpdB/IKlfZg+5Z2T+Oe1z0Hv7immAgfH1KtRU++xIEUJCuoKCMB50IWTNFXe2FJg74qRi8RMybMj6+DdD7Sn/dHmP+2FcVFw1O/XB/JqJOhpN5JiyMgw1eEW5XwERiVc2TBCLVQPR5PvPXMfFWROGl0019ZNpXTCyGfq3OhL/1jPgMPru3N6fbWqnJun8bDQC7A17KnV9nM4Y/Kdz8LIaRQAVbnI61REPxFk1hEtIGW4TFiPsKbROX1af0Wu0+cUyxwVrmKosrWvOTPaJWnlD0/y6yj6ErxopCQAMlB6xl9lY/PBFW88KZK7G4x5rp2/96ROrWzubSjr3R5qTeMjD86dbywpgnSqVzSN6iABxFKIzoi+aOnLS6P0+G2WRFYfGIHQ7Bt+gYIPNKHQ6rey2oPrJ4u+4tC2qvVzSPFq8xg2PsQ0C4SIQp/onb3dmJwQqSJMcNr9crHAcCdpnWF2C+lG3WuabGvYasup+QxT6AUEquXnlPYo="
+  on:
+    branch: master
+    repo: eHealthAfrica/joffrey-example
