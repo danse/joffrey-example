@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bookkeeping</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+    [data-show] {
+      display: none;
+    }
+    [data-account-state="signed-out"] [data-show="signed-out"],
+    [data-account-state="signed-in"] [data-show="signed-in"] {
+      display: block;
+    }
+    </style>
+  </head>
+  <body class="container" data-account-state="signed-out">
+    <h1>Bookkeeping</h1>
+
+    <div id="account">
+      <form data-show="signed-out" action="/joffrey/accounts/session" class="form-inline">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" name="email" value="joffrey-admin@example.com" placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="password" class="form-control" name="password" value="offwiththeirheads!" placeholder="secret">
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+      <p data-show="signed-in">
+        Welcome back,<br>
+        <strong id="username"></strong>
+        (<a id="signout" href="signOut">sign out</a>)
+      </p>
+    </div>
+
+    <div data-show="signed-in">
+      <form action="/joffrey/importer/data-reports">
+        <h2>Submit / Update report</h2>
+        <div class="form-group">
+          <select name="scope[year]" class="form-control">
+            <option>2015</option>
+            <option>2014</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select name="scope[quarter]"  class="form-control">
+            <option value="1">Q1</option>
+            <option value="2">Q2</option>
+            <option value="3">Q3</option>
+            <option value="4">Q4</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input name="name" class="form-control" placeholder="report name">
+        </div>
+        <div class="form-group">
+          <p class="help-block">
+            Add one line per income/expense, in the format
+            "+123.40 category"
+          </p>
+
+          <textarea name="data" class="form-control"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <h2>Submitted Reports</h2>
+      <ul id="reports"></ul>
+
+      <h2>Expenses by category</h2>
+      <pre id="expenses"></pre>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+      // send bearer token if present
+      $.ajaxSetup({
+        beforeSend: function (xhr) {
+          var token = localStorage.getItem('bearerToken')
+          if (!token) return
+          xhr.setRequestHeader('authorization', 'Bearer ' + token)
+        }
+      })
+
+      // session
+      var $accountForm = $('form[action="/joffrey/accounts/session"]')
+      $accountForm.on('submit', handleSignInFormSubmit)
+      $('#signout').on('click', handleSignOutClick)
+      checkSessionAndFetchData()
+
+      // reports
+      var $dataReportForm = $('form[action="/joffrey/importer/data-reports"]')
+      $dataReportForm.on('submit', handleDataReportFormSubmit)
+      $(document.body).on('click', '[data-id]', handleExistingReportEditClick)
+
+      // methods
+      function handleExistingReportEditClick (event) {
+        event.preventDefault()
+        var id = $(event.currentTarget).data('id')
+        $.getJSON('/joffrey/importer/data-reports/' + id)
+          .done(function (report) {
+            $dataReportForm.attr('data-report-id', id)
+            $dataReportForm.find('[name="scope[year]"]').val(report.scope.year)
+            $dataReportForm.find('[name="scope[quarter]"]').val(report.scope.quarter)
+            $dataReportForm.find('[name="name"]').val(report.name)
+            $dataReportForm.find('[name="data"]').val(report.data)
+          })
+          .fail(handleRequestError)
+      }
+      function handleDataReportFormSubmit (event) {
+        event.preventDefault()
+
+        var action = $dataReportForm.attr('action')
+        var year = $('[name="scope[year]"]').val()
+        var quarter = $('[name="scope[quarter]"]').val()
+        var name = $('[name="name"]').val()
+        var data = $('[name="data"]').val()
+        var reportId = $dataReportForm.data('report-id')
+
+        if (reportId) {
+          action += '/' + reportId
+        }
+
+        $.ajax({
+          type: reportId ? 'put' : 'post',
+          url: action,
+          contentType: 'application/json',
+          data: JSON.stringify({
+            sourceId: reportId ? undefined : 'bookkeeping',
+            scope: reportId ? undefined : {
+              id: year + '-' + quarter,
+              year: year,
+              quarter: quarter
+            },
+            name: name,
+            data: data
+          })
+        })
+        .done(function () {
+          alert('submitted')
+          $dataReportForm[0].reset()
+          checkSessionAndFetchData()
+        })
+        .fail(handleRequestError)
+      }
+      function handleSignInFormSubmit(event) {
+        event.preventDefault()
+
+        var action = $accountForm.attr('action')
+        var email = $('[name="email"]').val()
+        var password = $('[name="password"]').val()
+
+        $.ajax({
+          type: 'post',
+          url: action,
+          contentType: 'application/json',
+          data: JSON.stringify({
+            name: email,
+            password: password
+          })
+        })
+        .done(function (response) {
+          $(document.body).attr('data-account-state', 'signed-in')
+          localStorage.setItem('username', response.name)
+          localStorage.setItem('bearerToken', response.bearerToken)
+          checkSessionAndFetchData()
+        })
+        .fail(handleRequestError)
+      }
+      function handleSignOutClick (event) {
+        event.preventDefault()
+
+        $.ajax({
+          type: 'delete',
+          url: '/joffrey/accounts/session'
+        })
+          .done(function () {
+            localStorage.removeItem('username')
+            localStorage.removeItem('bearerToken')
+            checkSessionAndFetchData()
+          })
+          .fail(function (xhr, status, error) {
+            alert(error)
+          })
+      }
+
+
+      function checkSessionAndFetchData() {
+        var token = localStorage.getItem('bearerToken')
+        var username = localStorage.getItem('username')
+
+        if (!token || !username) {
+          return $(document.body).attr('data-account-state', 'signed-out')
+        }
+
+        $(document.body).attr('data-account-state', 'signed-in')
+        $('#username').text(username)
+
+        loadReports()
+        fetchExpensesByCategory()
+        checkSession()
+      }
+      function checkSession () {
+        $.getJSON('/joffrey/accounts/session')
+          .fail(function () {
+            $(document.body).attr('data-account-state', 'signed-out')
+            $('#reports').empty()
+          })
+      }
+      function loadReports () {
+        $.getJSON('/joffrey/importer/data-reports')
+          .done(function (reports) {
+            var html = ''
+            reports.forEach(function (report) {
+              html += '<li><a href="#" data-id="' + report.id + '">' + report.name + ' (' + report.scope.id + ' by ' + report.createdBy.login + ')</a></li>'
+            })
+            $('#reports').html(html)
+          })
+      }
+      function fetchExpensesByCategory () {
+        $('#expenses').load('/indices/movementsByCategory')
+      }
+
+      function handleRequestError (xhr, status, error) {
+        if (xhr.responseJSON && xhr.responseJSON.message) {
+          error = xhr.responseJSON.message
+        }
+        alert(error)
+      }
+    </script>
+  </body>
+</html>
