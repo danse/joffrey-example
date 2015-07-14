@@ -20,8 +20,8 @@ npm start
 
 ## Test
 
-[![Dependency Status](https://david-dm.org/hoodiehq/joffrey-example.svg)](https://david-dm.org/hoodiehq/joffrey-example)
-[![devDependency Status](https://david-dm.org/hoodiehq/joffrey-example/dev-status.svg)](https://david-dm.org/hoodiehq/joffrey-example#info=devDependencies)
+[![Dependency Status](https://david-dm.org/eHealthAfrica/joffrey-example.svg)](https://david-dm.org/eHealthAfrica/joffrey-example)
+[![devDependency Status](https://david-dm.org/eHealthAfrica/joffrey-example/dev-status.svg)](https://david-dm.org/eHealthAfrica/joffrey-example#info=devDependencies)
 
 ```
 npm test
