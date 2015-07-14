@@ -1,0 +1,30 @@
+{
+  "name": "joffrey-example",
+  "version": "0.0.0-semantically-released",
+  "description": "> show case app using joffrey",
+  "main": "index.js",
+  "scripts": {
+    "jshint": "jshint index.js",
+    "start": "joffrey",
+    "test": "npm run jshint",
+    "prepublish": "semantic-release pre",
+    "postpublish": "semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eHealthAfrica/joffrey-example.git"
+  },
+  "author": "eHealth Africa",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/eHealthAfrica/joffrey-example/issues"
+  },
+  "homepage": "https://github.com/eHealthAfrica/joffrey-example#readme",
+  "dependencies": {
+    "joffrey": "^1.0.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.8.0",
+    "semantic-release": "^3.3.2"
+  }
+}
