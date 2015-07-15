@@ -10,7 +10,7 @@ module.exports = {
   routes: [{
     method: 'GET',
     path: '/indices/movementsByCategory',
-    handler: function(request, reply) {
+    handler: function (request, reply) {
       var server = request.connection.server;
       var store = server.methods.getStore({
         name: 'indicators',
@@ -20,8 +20,8 @@ module.exports = {
       store.db.query('movementsByCategory', {
         group_level: 1
       })
-        .then(function(response) {
-          var movementsByCategory = response.rows.reduce(function(map, row) {
+        .then(function (response) {
+          var movementsByCategory = response.rows.reduce(function (map, row) {
             map[row.key] = row.value.amount;
             return map;
           }, {});
@@ -37,11 +37,11 @@ module.exports = {
       'movementsByCategory': {
         version: '1.0.0',
         /* globals emit */
-        map: function(indicatorReport) {
+        map: function (indicatorReport) {
           emit(indicatorReport.data.category, indicatorReport.data.amount);
         },
         /* globals sum */
-        reduce: function(keys, values) {
+        reduce: function (keys, values) {
           return {
             amount: sum(values)
           };
@@ -52,9 +52,10 @@ module.exports = {
 
   // normalisation scripts by dataReport.type => [indicator.type, handler]
   normalise: {
-    'bookkeeping': ['movement', function(server, dataReport, callback) {
+    'bookkeeping': ['movement', function (server, dataReport, callback) {
       var lines = dataReport.data.split(/\n/);
-      var indicators = [], matches;
+      var indicators = [];
+      var matches;
       for (var i = 0; i < lines.length; i++) {
         matches = lines[i].match(/^([+-]?[\d\.]+)\s*(.*)$/);
         if (!matches) return callback(new Error('Data could not be parsed'));

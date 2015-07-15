@@ -147,7 +147,7 @@
         })
         .fail(handleRequestError)
       }
-      function handleSignInFormSubmit(event) {
+      function handleSignInFormSubmit (event) {
         event.preventDefault()
 
         var action = $accountForm.attr('action')
@@ -189,7 +189,7 @@
       }
 
 
-      function checkSessionAndFetchData() {
+      function checkSessionAndFetchData () {
         var token = localStorage.getItem('bearerToken')
         var username = localStorage.getItem('username')
 
