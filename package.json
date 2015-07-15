@@ -4,9 +4,8 @@
   "description": "> show case app using joffrey",
   "main": "index.js",
   "scripts": {
-    "jshint": "jshint index.js",
     "start": "joffrey",
-    "test": "npm run jshint",
+    "test": "semistandard",
     "prepublish": "semantic-release pre",
     "postpublish": "semantic-release post"
   },
@@ -24,7 +23,7 @@
     "joffrey": "^1.0.0"
   },
   "devDependencies": {
-    "jshint": "^2.8.0",
-    "semantic-release": "^3.3.2"
+    "semantic-release": "^3.3.2",
+    "semistandard": "^6.1.2"
   }
 }
