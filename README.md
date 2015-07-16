@@ -13,7 +13,7 @@ category.
 ### Setup
 
 ```
-git clone git@github.com:eHealthAfrica/joffrey.git
+git clone git@github.com:eHealthAfrica/joffrey-example.git
 npm install # not working yet, see belog
 npm start
 ```
