@@ -65,13 +65,21 @@
                               (reset! val ""))} 
         "Add"]])))
 
+(def jquery (js* "$"))
+
 (defn contact-list []
-  [:div
-   [:h1 "Contact list"]
-   [:ul
-    (for [c (:contacts @app-state)]
-      [contact c])]
-   [new-contact]])
+  (do (.log js/console (pr-str [1 2 3 4]))
+      (.log js/console (pr-str "Hello"))
+      (jquery
+       (fn []
+         (-> (jquery "div.test")
+             (println))))
+      [:div
+       [:h1 "Contact list"]
+       [:ul
+        (for [c (:contacts @app-state)]
+          [contact c])]
+       [new-contact]]))
 
 ;; Render the root component
 (defn start []

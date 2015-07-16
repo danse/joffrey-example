@@ -39411,9 +39411,9 @@ reagent_tutorial.core.update_contacts_BANG_ = function() {
     return update_contacts_BANG___delegate.call(this, f, args);
   };
   update_contacts_BANG_.cljs$lang$maxFixedArity = 1;
-  update_contacts_BANG_.cljs$lang$applyTo = function(arglist__4947) {
-    var f = cljs.core.first(arglist__4947);
-    var args = cljs.core.rest(arglist__4947);
+  update_contacts_BANG_.cljs$lang$applyTo = function(arglist__4997) {
+    var f = cljs.core.first(arglist__4997);
+    var args = cljs.core.rest(arglist__4997);
     return update_contacts_BANG___delegate(f, args);
   };
   update_contacts_BANG_.cljs$core$IFn$_invoke$arity$variadic = update_contacts_BANG___delegate;
@@ -39424,16 +39424,16 @@ reagent_tutorial.core.add_contact_BANG_ = function add_contact_BANG_(c) {
 };
 reagent_tutorial.core.remove_contact_BANG_ = function remove_contact_BANG_(c) {
   return reagent_tutorial.core.update_contacts_BANG_.call(null, function(cs) {
-    return cljs.core.vec.call(null, cljs.core.remove.call(null, function(p1__4948_SHARP_) {
-      return cljs.core._EQ_.call(null, p1__4948_SHARP_, c);
+    return cljs.core.vec.call(null, cljs.core.remove.call(null, function(p1__4998_SHARP_) {
+      return cljs.core._EQ_.call(null, p1__4998_SHARP_, c);
     }, cs));
   }, c);
 };
-reagent_tutorial.core.middle_name = function middle_name(p__4949) {
-  var map__4951 = p__4949;
-  var map__4951__$1 = cljs.core.seq_QMARK_.call(null, map__4951) ? cljs.core.apply.call(null, cljs.core.hash_map, map__4951) : map__4951;
-  var middle_initial = cljs.core.get.call(null, map__4951__$1, new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286));
-  var middle = cljs.core.get.call(null, map__4951__$1, new cljs.core.Keyword(null, "middle", "middle", 4234530055));
+reagent_tutorial.core.middle_name = function middle_name(p__4999) {
+  var map__5001 = p__4999;
+  var map__5001__$1 = cljs.core.seq_QMARK_.call(null, map__5001) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5001) : map__5001;
+  var middle_initial = cljs.core.get.call(null, map__5001__$1, new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286));
+  var middle = cljs.core.get.call(null, map__5001__$1, new cljs.core.Keyword(null, "middle", "middle", 4234530055));
   if (cljs.core.truth_(middle)) {
     return[cljs.core.str(" "), cljs.core.str(middle)].join("");
   } else {
@@ -39444,37 +39444,37 @@ reagent_tutorial.core.middle_name = function middle_name(p__4949) {
     }
   }
 };
-reagent_tutorial.core.display_name = function display_name(p__4952) {
-  var map__4954 = p__4952;
-  var map__4954__$1 = cljs.core.seq_QMARK_.call(null, map__4954) ? cljs.core.apply.call(null, cljs.core.hash_map, map__4954) : map__4954;
-  var contact = map__4954__$1;
-  var last = cljs.core.get.call(null, map__4954__$1, new cljs.core.Keyword(null, "last", "last", 1017218568));
-  var first = cljs.core.get.call(null, map__4954__$1, new cljs.core.Keyword(null, "first", "first", 1111344674));
+reagent_tutorial.core.display_name = function display_name(p__5002) {
+  var map__5004 = p__5002;
+  var map__5004__$1 = cljs.core.seq_QMARK_.call(null, map__5004) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5004) : map__5004;
+  var contact = map__5004__$1;
+  var last = cljs.core.get.call(null, map__5004__$1, new cljs.core.Keyword(null, "last", "last", 1017218568));
+  var first = cljs.core.get.call(null, map__5004__$1, new cljs.core.Keyword(null, "first", "first", 1111344674));
   return[cljs.core.str(last), cljs.core.str(", "), cljs.core.str(first), cljs.core.str(reagent_tutorial.core.middle_name.call(null, contact))].join("");
 };
 reagent_tutorial.core.parse_contact = function parse_contact(contact_str) {
-  var vec__4959 = clojure.string.split.call(null, contact_str, /\s+/);
-  var first = cljs.core.nth.call(null, vec__4959, 0, null);
-  var middle = cljs.core.nth.call(null, vec__4959, 1, null);
-  var last = cljs.core.nth.call(null, vec__4959, 2, null);
-  var parts = vec__4959;
-  var vec__4960 = last == null ? new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [first, middle], null) : new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [first, last, middle], null);
-  var first__$1 = cljs.core.nth.call(null, vec__4960, 0, null);
-  var last__$1 = cljs.core.nth.call(null, vec__4960, 1, null);
-  var middle__$1 = cljs.core.nth.call(null, vec__4960, 2, null);
+  var vec__5009 = clojure.string.split.call(null, contact_str, /\s+/);
+  var first = cljs.core.nth.call(null, vec__5009, 0, null);
+  var middle = cljs.core.nth.call(null, vec__5009, 1, null);
+  var last = cljs.core.nth.call(null, vec__5009, 2, null);
+  var parts = vec__5009;
+  var vec__5010 = last == null ? new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [first, middle], null) : new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [first, last, middle], null);
+  var first__$1 = cljs.core.nth.call(null, vec__5010, 0, null);
+  var last__$1 = cljs.core.nth.call(null, vec__5010, 1, null);
+  var middle__$1 = cljs.core.nth.call(null, vec__5010, 2, null);
   var middle__$2 = cljs.core.truth_(middle__$1) ? clojure.string.replace.call(null, middle__$1, ".", "") : null;
   var c = cljs.core.truth_(middle__$2) ? cljs.core.count.call(null, middle__$2) : 0;
-  if (cljs.core.reduce.call(null, cljs.core._PLUS_, cljs.core.map.call(null, function(p1__4955_SHARP_) {
-    if (cljs.core.truth_(p1__4955_SHARP_)) {
+  if (cljs.core.reduce.call(null, cljs.core._PLUS_, cljs.core.map.call(null, function(p1__5005_SHARP_) {
+    if (cljs.core.truth_(p1__5005_SHARP_)) {
       return 1;
     } else {
       return 0;
     }
   }, parts)) >= 2) {
-    var G__4961 = new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "first", "first", 1111344674), first__$1, new cljs.core.Keyword(null, "last", "last", 1017218568), last__$1], null);
-    var G__4961__$1 = c === 1 ? cljs.core.assoc.call(null, G__4961, new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286), middle__$2) : G__4961;
-    var G__4961__$2 = c >= 2 ? cljs.core.assoc.call(null, G__4961__$1, new cljs.core.Keyword(null, "middle", "middle", 4234530055), middle__$2) : G__4961__$1;
-    return G__4961__$2;
+    var G__5011 = new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "first", "first", 1111344674), first__$1, new cljs.core.Keyword(null, "last", "last", 1017218568), last__$1], null);
+    var G__5011__$1 = c === 1 ? cljs.core.assoc.call(null, G__5011, new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286), middle__$2) : G__5011;
+    var G__5011__$2 = c >= 2 ? cljs.core.assoc.call(null, G__5011__$1, new cljs.core.Keyword(null, "middle", "middle", 4234530055), middle__$2) : G__5011__$1;
+    return G__5011__$2;
   } else {
     return null;
   }
@@ -39489,8 +39489,8 @@ reagent_tutorial.core.new_contact = function new_contact() {
   var val = reagent.core.atom.call(null, "");
   return function() {
     return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "input", "input", 1114262332), new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "type", "type", 1017479852), "text", new cljs.core.Keyword(null, "placeholder", "placeholder", 1612151013), "Contact Name", new cljs.core.Keyword(null, 
-    "value", "value", 1125876963), cljs.core.deref.call(null, val), new cljs.core.Keyword(null, "on-change", "on-change", 606853840), function(p1__4962_SHARP_) {
-      return cljs.core.reset_BANG_.call(null, val, p1__4962_SHARP_.target.value);
+    "value", "value", 1125876963), cljs.core.deref.call(null, val), new cljs.core.Keyword(null, "on-change", "on-change", 606853840), function(p1__5012_SHARP_) {
+      return cljs.core.reset_BANG_.call(null, val, p1__5012_SHARP_.target.value);
     }], null)], null), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "button", "button", 3931183780), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "on-click", "on-click", 1416542092), function() {
       var temp__4092__auto__ = reagent_tutorial.core.parse_contact.call(null, cljs.core.deref.call(null, val));
       if (cljs.core.truth_(temp__4092__auto__)) {
@@ -39503,27 +39503,33 @@ reagent_tutorial.core.new_contact = function new_contact() {
     }], null), "Add"], null)], null);
   };
 };
+reagent_tutorial.core.jquery = $;
 reagent_tutorial.core.contact_list = function contact_list() {
+  console.log(cljs.core.pr_str.call(null, new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [1, 2, 3, 4], null)));
+  console.log(cljs.core.pr_str.call(null, "Hello"));
+  reagent_tutorial.core.jquery.call(null, function() {
+    return cljs.core.println.call(null, reagent_tutorial.core.jquery.call(null, "div.test"));
+  });
   return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "h1", "h1", 1013907515), "Contact list"], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "ul", "ul", 1013907977), function() {
-    var iter__4119__auto__ = function iter__4967(s__4968) {
+    var iter__4119__auto__ = function iter__5017(s__5018) {
       return new cljs.core.LazySeq(null, function() {
-        var s__4968__$1 = s__4968;
+        var s__5018__$1 = s__5018;
         while (true) {
-          var temp__4092__auto__ = cljs.core.seq.call(null, s__4968__$1);
+          var temp__4092__auto__ = cljs.core.seq.call(null, s__5018__$1);
           if (temp__4092__auto__) {
-            var s__4968__$2 = temp__4092__auto__;
-            if (cljs.core.chunked_seq_QMARK_.call(null, s__4968__$2)) {
-              var c__4117__auto__ = cljs.core.chunk_first.call(null, s__4968__$2);
+            var s__5018__$2 = temp__4092__auto__;
+            if (cljs.core.chunked_seq_QMARK_.call(null, s__5018__$2)) {
+              var c__4117__auto__ = cljs.core.chunk_first.call(null, s__5018__$2);
               var size__4118__auto__ = cljs.core.count.call(null, c__4117__auto__);
-              var b__4970 = cljs.core.chunk_buffer.call(null, size__4118__auto__);
+              var b__5020 = cljs.core.chunk_buffer.call(null, size__4118__auto__);
               if (function() {
-                var i__4969 = 0;
+                var i__5019 = 0;
                 while (true) {
-                  if (i__4969 < size__4118__auto__) {
-                    var c = cljs.core._nth.call(null, c__4117__auto__, i__4969);
-                    cljs.core.chunk_append.call(null, b__4970, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.contact, c], null));
-                    var G__4971 = i__4969 + 1;
-                    i__4969 = G__4971;
+                  if (i__5019 < size__4118__auto__) {
+                    var c = cljs.core._nth.call(null, c__4117__auto__, i__5019);
+                    cljs.core.chunk_append.call(null, b__5020, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.contact, c], null));
+                    var G__5021 = i__5019 + 1;
+                    i__5019 = G__5021;
                     continue;
                   } else {
                     return true;
@@ -39531,13 +39537,13 @@ reagent_tutorial.core.contact_list = function contact_list() {
                   break;
                 }
               }()) {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__4970), iter__4967.call(null, cljs.core.chunk_rest.call(null, s__4968__$2)));
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__5020), iter__5017.call(null, cljs.core.chunk_rest.call(null, s__5018__$2)));
               } else {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__4970), null);
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__5020), null);
               }
             } else {
-              var c = cljs.core.first.call(null, s__4968__$2);
-              return cljs.core.cons.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.contact, c], null), iter__4967.call(null, cljs.core.rest.call(null, s__4968__$2)));
+              var c = cljs.core.first.call(null, s__5018__$2);
+              return cljs.core.cons.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.contact, c], null), iter__5017.call(null, cljs.core.rest.call(null, s__5018__$2)));
             }
           } else {
             return null;
