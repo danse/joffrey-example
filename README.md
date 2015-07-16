@@ -14,9 +14,25 @@ category.
 
 ```
 git clone git@github.com:eHealthAfrica/joffrey-example.git
-npm install # not working yet, see belog
+npm install # not working yet, see below
 npm start
 ```
+
+#### Workarounds
+
+After running `npm install`, you may need to explicitly instal joffrey-accounts:
+
+```npm install joffrey-accounts```
+
+And boom:
+
+```npm install boom```
+
+#### Couchdb setup
+
+If you are not running CouchDB in admin party mode, you will need to add the user joffrey / secret.
+
+If you then have problems logging in, go into CouchDB and change the password of joffrey-admin@example.com to whatever you see fit.
 
 ## Test
 
