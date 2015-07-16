@@ -17,24 +17,6 @@
   <body class="container" data-account-state="signed-out">
     <h1>Bookkeeping</h1>
 
-    <div id="account">
-      <form data-show="signed-out" action="/joffrey/accounts/session" class="form-inline">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="text" class="form-control" name="email" value="joffrey-admin@example.com" placeholder="john@example.com">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="password" class="form-control" name="password" value="offwiththeirheads!" placeholder="secret">
-        </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
-      </form>
-      <p data-show="signed-in">
-        Welcome back,<br>
-        <strong id="username"></strong>
-        (<a id="signout" href="signOut">sign out</a>)
-      </p>
-    </div>
 
     <div data-show="signed-in">
       <form action="/joffrey/importer/data-reports">

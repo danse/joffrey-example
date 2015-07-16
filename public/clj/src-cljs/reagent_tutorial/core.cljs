@@ -5,84 +5,91 @@
 (enable-console-print!)
 
 ;; The "database" of your client side UI.
+(def auth
+  (r/atom
+    {:name "joffrey-admin@example.com"
+     :password "adminadmin"
+     :logged-in false }))
+
 (def app-state
   (r/atom
-   {:contacts
-    [{:first "Ben" :last "Bitdiddle" :email "benb@mit.edu"}
-     {:first "Alyssa" :middle-initial "P" :last "Hacker" :email "aphacker@mit.edu"}
-     {:first "Eva" :middle "Lu" :last "Ator" :email "eval@mit.edu"}
-     {:first "Louis" :last "Reasoner" :email "prolog@mit.edu"}
-     {:first "Cy" :middle-initial "D" :last "Effect" :email "bugs@mit.edu"}
-     {:first "Lem" :middle-initial "E" :last "Tweakit" :email "morebugs@mit.edu"}]}))
+    {}))
 
-(defn update-contacts! [f & args]
-  (apply swap! app-state update-in [:contacts] f args))
+;; Util stuff
 
-(defn add-contact! [c]
-  (update-contacts! conj c))
+;; Include token when we have it
+(.ajaxSetup js/$ (clj->js {:beforeSend (fn [xhr]
+                                         (when-let [token (:bearerToken @auth)]
+                                           (.setRequestHeader xhr "authorization" (str "Bearer " token))))}))
 
-(defn remove-contact! [c]
-  (update-contacts! (fn [cs]
-                      (vec (remove #(= % c) cs)))
-                    c))
+(defn stringify [obj]
+  (.stringify js/JSON (clj->js obj)))
 
-;; The next three fuctions are copy/pasted verbatim from the Om tutorial
-(defn middle-name [{:keys [middle middle-initial]}]
-  (cond
-   middle (str " " middle)
-   middle-initial (str " " middle-initial ".")))
+;; Login, Logout
+(defn login [e]
+  (.preventDefault e)
+  (.ajax js/$ (clj->js {:type "POST"
+                        :url "/joffrey/accounts/session"
+                        :contentType "application/json"
+                        :data (-> @auth (select-keys [:name :password]) stringify)
+                        :success (fn [resp]
+                                   (let [resp (js->clj resp)]
+                                     (.log js/console resp)
+                                     (swap! auth assoc :logged-in true)
+                                     (swap! auth dissoc :msg)
+                                     (swap! auth merge resp)))
+                        :error (fn [xhr status resp]
+                                   (swap! auth assoc :msg resp :logged-in false))})))
 
-(defn display-name [{:keys [first last] :as contact}]
-  (str last ", " first (middle-name contact)))
-
-(defn parse-contact [contact-str]
-  (let [[first middle last :as parts] (string/split contact-str #"\s+")
-        [first last middle] (if (nil? last) [first middle] [first last middle])
-        middle (when middle (string/replace middle "." ""))
-        c (if middle (count middle) 0)]
-    (when (>= (reduce + (map #(if % 1 0) parts)) 2)
-      (cond-> {:first first :last last}
-        (== c 1) (assoc :middle-initial middle)
-        (>= c 2) (assoc :middle middle)))))
+(defn logout [e]
+  (.preventDefault e)
+  (.ajax js/$ (clj->js {:type "DELETE"
+                        :url "/joffrey/accounts/session"
+                        :success (fn [resp]
+                                   (let [resp (js->clj resp)]
+                                     (reset! auth {:logged-in false})))
+                        :error (fn [xhr status resp]
+                                   (.alert js/window resp))})))
 
 ;; UI components
-(defn contact [c]
-  [:li
-   [:span (display-name c)]
-   [:button {:on-click #(remove-contact! c)} 
-    "Delete"]])
+(defn login-form []
+  [:form {:name "login-form"
+          :action "/joffrey/accounts/session"
+          :class "form-inline"
+          :on-submit login}
+   (when-let [msg (:msg @auth)]
+     [:div  msg])
+   [:div {:class "form-group"}
+    [:label {:for "email"} "Email"]
+    [:input {:type "text"
+              :class "form-control"
+              :name "email"
+              :value (-> @auth :name)
+              :on-change #(swap! auth assoc :name (-> % .-target .-value))
+              :placeholder "john@example.com" }]]
+   [:div {:class "form-group"}
+    [:label {:for "password"} "Password"]
+    [:input {:type "password"
+              :class "form-control"
+              :name "password"
+              :value (-> @auth :password)
+              :on-change #(swap! auth assoc :password (-> % .-target .-value))
+              :placeholder "secret"}]]
+   [:button {:type "submit" :class "btn btn-primary"} "Sign In"]])
 
-(defn new-contact []
-  (let [val (r/atom "")]
-    (fn []
-      [:div
-       [:input {:type "text"
-                :placeholder "Contact Name"
-                :value @val
-                :on-change #(reset! val (-> % .-target .-value))}]
-       [:button {:on-click #(when-let [c (parse-contact @val)]
-                              (add-contact! c)
-                              (reset! val ""))} 
-        "Add"]])))
+(defn logout-form []
+  [:p (str "Welcome back, " (get @auth "fullname"))
+   [:br]
+   [:a {:id "signout" :href "signOut" :on-click logout} "Sign Out"]])
 
-(def jquery (js* "$"))
-
-(defn contact-list []
-  (do (.log js/console (pr-str [1 2 3 4]))
-      (.log js/console (pr-str "Hello"))
-      (jquery
-       (fn []
-         (-> (jquery "div.test")
-             (println))))
-      [:div
-       [:h1 "Contact list"]
-       [:ul
-        (for [c (:contacts @app-state)]
-          [contact c])]
-       [new-contact]]))
+(defn app []
+  (let [logged-in (-> @auth :logged-in)]
+    [:div {:id "account"} (if logged-in
+                              (logout-form)
+                              (login-form))] ))
 
 ;; Render the root component
 (defn start []
-  (r/render-component 
-   [contact-list]
+  (r/render-component
+   [app]
    (.getElementById js/document "root")))

@@ -39394,167 +39394,70 @@ goog.require("reagent.core");
 goog.require("clojure.string");
 goog.require("clojure.string");
 cljs.core.enable_console_print_BANG_.call(null);
-reagent_tutorial.core.app_state = reagent.core.atom.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "contacts", "contacts", 4741419973), new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "first", "first", 1111344674), "Ben", new cljs.core.Keyword(null, "last", "last", 1017218568), "Bitdiddle", new cljs.core.Keyword(null, "email", "email", 1110523662), "benb@mit.edu"], 
-null), new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "first", "first", 1111344674), "Alyssa", new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286), "P", new cljs.core.Keyword(null, "last", "last", 1017218568), "Hacker", new cljs.core.Keyword(null, "email", "email", 1110523662), "aphacker@mit.edu"], null), new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "first", "first", 1111344674), "Eva", new cljs.core.Keyword(null, "middle", 
-"middle", 4234530055), "Lu", new cljs.core.Keyword(null, "last", "last", 1017218568), "Ator", new cljs.core.Keyword(null, "email", "email", 1110523662), "eval@mit.edu"], null), new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "first", "first", 1111344674), "Louis", new cljs.core.Keyword(null, "last", "last", 1017218568), "Reasoner", new cljs.core.Keyword(null, "email", "email", 1110523662), "prolog@mit.edu"], null), new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, 
-"first", "first", 1111344674), "Cy", new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286), "D", new cljs.core.Keyword(null, "last", "last", 1017218568), "Effect", new cljs.core.Keyword(null, "email", "email", 1110523662), "bugs@mit.edu"], null), new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "first", "first", 1111344674), "Lem", new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286), "E", new cljs.core.Keyword(null, "last", "last", 
-1017218568), "Tweakit", new cljs.core.Keyword(null, "email", "email", 1110523662), "morebugs@mit.edu"], null)], null)], null));
-reagent_tutorial.core.update_contacts_BANG_ = function() {
-  var update_contacts_BANG___delegate = function(f, args) {
-    return cljs.core.apply.call(null, cljs.core.swap_BANG_, reagent_tutorial.core.app_state, cljs.core.update_in, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "contacts", "contacts", 4741419973)], null), f, args);
-  };
-  var update_contacts_BANG_ = function(f, var_args) {
-    var args = null;
-    if (arguments.length > 1) {
-      args = cljs.core.array_seq(Array.prototype.slice.call(arguments, 1), 0);
-    }
-    return update_contacts_BANG___delegate.call(this, f, args);
-  };
-  update_contacts_BANG_.cljs$lang$maxFixedArity = 1;
-  update_contacts_BANG_.cljs$lang$applyTo = function(arglist__4997) {
-    var f = cljs.core.first(arglist__4997);
-    var args = cljs.core.rest(arglist__4997);
-    return update_contacts_BANG___delegate(f, args);
-  };
-  update_contacts_BANG_.cljs$core$IFn$_invoke$arity$variadic = update_contacts_BANG___delegate;
-  return update_contacts_BANG_;
-}();
-reagent_tutorial.core.add_contact_BANG_ = function add_contact_BANG_(c) {
-  return reagent_tutorial.core.update_contacts_BANG_.call(null, cljs.core.conj, c);
-};
-reagent_tutorial.core.remove_contact_BANG_ = function remove_contact_BANG_(c) {
-  return reagent_tutorial.core.update_contacts_BANG_.call(null, function(cs) {
-    return cljs.core.vec.call(null, cljs.core.remove.call(null, function(p1__4998_SHARP_) {
-      return cljs.core._EQ_.call(null, p1__4998_SHARP_, c);
-    }, cs));
-  }, c);
-};
-reagent_tutorial.core.middle_name = function middle_name(p__4999) {
-  var map__5001 = p__4999;
-  var map__5001__$1 = cljs.core.seq_QMARK_.call(null, map__5001) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5001) : map__5001;
-  var middle_initial = cljs.core.get.call(null, map__5001__$1, new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286));
-  var middle = cljs.core.get.call(null, map__5001__$1, new cljs.core.Keyword(null, "middle", "middle", 4234530055));
-  if (cljs.core.truth_(middle)) {
-    return[cljs.core.str(" "), cljs.core.str(middle)].join("");
-  } else {
-    if (cljs.core.truth_(middle_initial)) {
-      return[cljs.core.str(" "), cljs.core.str(middle_initial), cljs.core.str(".")].join("");
-    } else {
-      return null;
-    }
-  }
-};
-reagent_tutorial.core.display_name = function display_name(p__5002) {
-  var map__5004 = p__5002;
-  var map__5004__$1 = cljs.core.seq_QMARK_.call(null, map__5004) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5004) : map__5004;
-  var contact = map__5004__$1;
-  var last = cljs.core.get.call(null, map__5004__$1, new cljs.core.Keyword(null, "last", "last", 1017218568));
-  var first = cljs.core.get.call(null, map__5004__$1, new cljs.core.Keyword(null, "first", "first", 1111344674));
-  return[cljs.core.str(last), cljs.core.str(", "), cljs.core.str(first), cljs.core.str(reagent_tutorial.core.middle_name.call(null, contact))].join("");
-};
-reagent_tutorial.core.parse_contact = function parse_contact(contact_str) {
-  var vec__5009 = clojure.string.split.call(null, contact_str, /\s+/);
-  var first = cljs.core.nth.call(null, vec__5009, 0, null);
-  var middle = cljs.core.nth.call(null, vec__5009, 1, null);
-  var last = cljs.core.nth.call(null, vec__5009, 2, null);
-  var parts = vec__5009;
-  var vec__5010 = last == null ? new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [first, middle], null) : new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [first, last, middle], null);
-  var first__$1 = cljs.core.nth.call(null, vec__5010, 0, null);
-  var last__$1 = cljs.core.nth.call(null, vec__5010, 1, null);
-  var middle__$1 = cljs.core.nth.call(null, vec__5010, 2, null);
-  var middle__$2 = cljs.core.truth_(middle__$1) ? clojure.string.replace.call(null, middle__$1, ".", "") : null;
-  var c = cljs.core.truth_(middle__$2) ? cljs.core.count.call(null, middle__$2) : 0;
-  if (cljs.core.reduce.call(null, cljs.core._PLUS_, cljs.core.map.call(null, function(p1__5005_SHARP_) {
-    if (cljs.core.truth_(p1__5005_SHARP_)) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }, parts)) >= 2) {
-    var G__5011 = new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "first", "first", 1111344674), first__$1, new cljs.core.Keyword(null, "last", "last", 1017218568), last__$1], null);
-    var G__5011__$1 = c === 1 ? cljs.core.assoc.call(null, G__5011, new cljs.core.Keyword(null, "middle-initial", "middle-initial", 2869404286), middle__$2) : G__5011;
-    var G__5011__$2 = c >= 2 ? cljs.core.assoc.call(null, G__5011__$1, new cljs.core.Keyword(null, "middle", "middle", 4234530055), middle__$2) : G__5011__$1;
-    return G__5011__$2;
+reagent_tutorial.core.auth = reagent.core.atom.call(null, new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "name", "name", 1017277949), "joffrey-admin@example.com", new cljs.core.Keyword(null, "password", "password", 2230889997), "adminadmin", new cljs.core.Keyword(null, "logged-in", "logged-in", 3524439234), false], null));
+reagent_tutorial.core.app_state = reagent.core.atom.call(null, cljs.core.PersistentArrayMap.EMPTY);
+$.ajaxSetup(cljs.core.clj__GT_js.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "beforeSend", "beforeSend", 1532403481), function(xhr) {
+  var temp__4092__auto__ = (new cljs.core.Keyword(null, "bearerToken", "bearerToken", 3009064586)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, reagent_tutorial.core.auth));
+  if (cljs.core.truth_(temp__4092__auto__)) {
+    var token = temp__4092__auto__;
+    return xhr.setRequestHeader("authorization", [cljs.core.str("Bearer "), cljs.core.str(token)].join(""));
   } else {
     return null;
   }
+}], null)));
+reagent_tutorial.core.stringify = function stringify(obj) {
+  return JSON.stringify(cljs.core.clj__GT_js.call(null, obj));
 };
-reagent_tutorial.core.contact = function contact(c) {
-  return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "li", "li", 1013907695), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "span", "span", 1017440956), reagent_tutorial.core.display_name.call(null, c)], null), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "button", "button", 3931183780), new cljs.core.PersistentArrayMap(null, 
-  1, [new cljs.core.Keyword(null, "on-click", "on-click", 1416542092), function() {
-    return reagent_tutorial.core.remove_contact_BANG_.call(null, c);
-  }], null), "Delete"], null)], null);
+reagent_tutorial.core.login = function login(e) {
+  e.preventDefault();
+  return $.ajax(cljs.core.clj__GT_js.call(null, new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null, "type", "type", 1017479852), "POST", new cljs.core.Keyword(null, "url", "url", 1014020321), "/joffrey/accounts/session", new cljs.core.Keyword(null, "contentType", "contentType", 624772805), "application/json", new cljs.core.Keyword(null, "data", "data", 1016980252), reagent_tutorial.core.stringify.call(null, cljs.core.select_keys.call(null, cljs.core.deref.call(null, reagent_tutorial.core.auth), 
+  new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "name", "name", 1017277949), new cljs.core.Keyword(null, "password", "password", 2230889997)], null))), new cljs.core.Keyword(null, "success", "success", 3441701749), function(resp) {
+    var resp__$1 = cljs.core.js__GT_clj.call(null, resp);
+    console.log(resp__$1);
+    cljs.core.swap_BANG_.call(null, reagent_tutorial.core.auth, cljs.core.assoc, new cljs.core.Keyword(null, "logged-in", "logged-in", 3524439234), true);
+    cljs.core.swap_BANG_.call(null, reagent_tutorial.core.auth, cljs.core.dissoc, new cljs.core.Keyword(null, "msg", "msg", 1014012659));
+    return cljs.core.swap_BANG_.call(null, reagent_tutorial.core.auth, cljs.core.merge, resp__$1);
+  }, new cljs.core.Keyword(null, "error", "error", 1110689146), function(xhr, status, resp) {
+    return cljs.core.swap_BANG_.call(null, reagent_tutorial.core.auth, cljs.core.assoc, new cljs.core.Keyword(null, "msg", "msg", 1014012659), resp, new cljs.core.Keyword(null, "logged-in", "logged-in", 3524439234), false);
+  }], null)));
 };
-reagent_tutorial.core.new_contact = function new_contact() {
-  var val = reagent.core.atom.call(null, "");
-  return function() {
-    return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "input", "input", 1114262332), new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "type", "type", 1017479852), "text", new cljs.core.Keyword(null, "placeholder", "placeholder", 1612151013), "Contact Name", new cljs.core.Keyword(null, 
-    "value", "value", 1125876963), cljs.core.deref.call(null, val), new cljs.core.Keyword(null, "on-change", "on-change", 606853840), function(p1__5012_SHARP_) {
-      return cljs.core.reset_BANG_.call(null, val, p1__5012_SHARP_.target.value);
-    }], null)], null), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "button", "button", 3931183780), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "on-click", "on-click", 1416542092), function() {
-      var temp__4092__auto__ = reagent_tutorial.core.parse_contact.call(null, cljs.core.deref.call(null, val));
-      if (cljs.core.truth_(temp__4092__auto__)) {
-        var c = temp__4092__auto__;
-        reagent_tutorial.core.add_contact_BANG_.call(null, c);
-        return cljs.core.reset_BANG_.call(null, val, "");
-      } else {
-        return null;
-      }
-    }], null), "Add"], null)], null);
-  };
+reagent_tutorial.core.logout = function logout(e) {
+  e.preventDefault();
+  return $.ajax(cljs.core.clj__GT_js.call(null, new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "type", "type", 1017479852), "DELETE", new cljs.core.Keyword(null, "url", "url", 1014020321), "/joffrey/accounts/session", new cljs.core.Keyword(null, "success", "success", 3441701749), function(resp) {
+    var resp__$1 = cljs.core.js__GT_clj.call(null, resp);
+    return cljs.core.reset_BANG_.call(null, reagent_tutorial.core.auth, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "logged-in", "logged-in", 3524439234), false], null));
+  }, new cljs.core.Keyword(null, "error", "error", 1110689146), function(xhr, status, resp) {
+    return window.alert(resp);
+  }], null)));
 };
-reagent_tutorial.core.jquery = $;
-reagent_tutorial.core.contact_list = function contact_list() {
-  console.log(cljs.core.pr_str.call(null, new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [1, 2, 3, 4], null)));
-  console.log(cljs.core.pr_str.call(null, "Hello"));
-  reagent_tutorial.core.jquery.call(null, function() {
-    return cljs.core.println.call(null, reagent_tutorial.core.jquery.call(null, "div.test"));
-  });
-  return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "h1", "h1", 1013907515), "Contact list"], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "ul", "ul", 1013907977), function() {
-    var iter__4119__auto__ = function iter__5017(s__5018) {
-      return new cljs.core.LazySeq(null, function() {
-        var s__5018__$1 = s__5018;
-        while (true) {
-          var temp__4092__auto__ = cljs.core.seq.call(null, s__5018__$1);
-          if (temp__4092__auto__) {
-            var s__5018__$2 = temp__4092__auto__;
-            if (cljs.core.chunked_seq_QMARK_.call(null, s__5018__$2)) {
-              var c__4117__auto__ = cljs.core.chunk_first.call(null, s__5018__$2);
-              var size__4118__auto__ = cljs.core.count.call(null, c__4117__auto__);
-              var b__5020 = cljs.core.chunk_buffer.call(null, size__4118__auto__);
-              if (function() {
-                var i__5019 = 0;
-                while (true) {
-                  if (i__5019 < size__4118__auto__) {
-                    var c = cljs.core._nth.call(null, c__4117__auto__, i__5019);
-                    cljs.core.chunk_append.call(null, b__5020, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.contact, c], null));
-                    var G__5021 = i__5019 + 1;
-                    i__5019 = G__5021;
-                    continue;
-                  } else {
-                    return true;
-                  }
-                  break;
-                }
-              }()) {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__5020), iter__5017.call(null, cljs.core.chunk_rest.call(null, s__5018__$2)));
-              } else {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__5020), null);
-              }
-            } else {
-              var c = cljs.core.first.call(null, s__5018__$2);
-              return cljs.core.cons.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.contact, c], null), iter__5017.call(null, cljs.core.rest.call(null, s__5018__$2)));
-            }
-          } else {
-            return null;
-          }
-          break;
-        }
-      }, null, null);
-    };
-    return iter__4119__auto__.call(null, (new cljs.core.Keyword(null, "contacts", "contacts", 4741419973)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, reagent_tutorial.core.app_state)));
-  }()], null), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.new_contact], null)], null);
+reagent_tutorial.core.login_form = function login_form() {
+  return new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "form", "form", 1017053238), new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "name", "name", 1017277949), "login-form", new cljs.core.Keyword(null, "action", "action", 3885920680), "/joffrey/accounts/session", new cljs.core.Keyword(null, "class", "class", 1108647146), "form-inline", new cljs.core.Keyword(null, "on-submit", "on-submit", 1076954936), reagent_tutorial.core.login], 
+  null), function() {
+    var temp__4092__auto__ = (new cljs.core.Keyword(null, "msg", "msg", 1014012659)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, reagent_tutorial.core.auth));
+    if (cljs.core.truth_(temp__4092__auto__)) {
+      var msg = temp__4092__auto__;
+      return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), msg], null);
+    } else {
+      return null;
+    }
+  }(), new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "class", "class", 1108647146), "form-group"], null), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "label", "label", 1116631654), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "for", "for", 1014005819), 
+  "email"], null), "Email"], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "input", "input", 1114262332), new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null, "type", "type", 1017479852), "text", new cljs.core.Keyword(null, "class", "class", 1108647146), "form-control", new cljs.core.Keyword(null, "name", "name", 1017277949), "email", new cljs.core.Keyword(null, "value", "value", 1125876963), (new cljs.core.Keyword(null, 
+  "name", "name", 1017277949)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, reagent_tutorial.core.auth)), new cljs.core.Keyword(null, "on-change", "on-change", 606853840), function(p1__7172_SHARP_) {
+    return cljs.core.swap_BANG_.call(null, reagent_tutorial.core.auth, cljs.core.assoc, new cljs.core.Keyword(null, "name", "name", 1017277949), p1__7172_SHARP_.target.value);
+  }, new cljs.core.Keyword(null, "placeholder", "placeholder", 1612151013), "john@example.com"], null)], null)], null), new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "class", "class", 1108647146), "form-group"], null), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "label", 
+  "label", 1116631654), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "for", "for", 1014005819), "password"], null), "Password"], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "input", "input", 1114262332), new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null, "type", "type", 1017479852), "password", new cljs.core.Keyword(null, "class", "class", 1108647146), "form-control", new cljs.core.Keyword(null, 
+  "name", "name", 1017277949), "password", new cljs.core.Keyword(null, "value", "value", 1125876963), (new cljs.core.Keyword(null, "password", "password", 2230889997)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, reagent_tutorial.core.auth)), new cljs.core.Keyword(null, "on-change", "on-change", 606853840), function(p1__7173_SHARP_) {
+    return cljs.core.swap_BANG_.call(null, reagent_tutorial.core.auth, cljs.core.assoc, new cljs.core.Keyword(null, "password", "password", 2230889997), p1__7173_SHARP_.target.value);
+  }, new cljs.core.Keyword(null, "placeholder", "placeholder", 1612151013), "secret"], null)], null)], null), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "button", "button", 3931183780), new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "type", "type", 1017479852), "submit", new cljs.core.Keyword(null, "class", "class", 1108647146), "btn btn-primary"], null), "Sign In"], null)], null);
+};
+reagent_tutorial.core.logout_form = function logout_form() {
+  return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "p", "p", 1013904354), [cljs.core.str("Welcome back, "), cljs.core.str(cljs.core.get.call(null, cljs.core.deref.call(null, reagent_tutorial.core.auth), "fullname"))].join(""), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "br", "br", 1013907394)], null), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, 
+  [new cljs.core.Keyword(null, "a", "a", 1013904339), new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "id", "id", 1013907597), "signout", new cljs.core.Keyword(null, "href", "href", 1017115293), "signOut", new cljs.core.Keyword(null, "on-click", "on-click", 1416542092), reagent_tutorial.core.logout], null), "Sign Out"], null)], null);
+};
+reagent_tutorial.core.app = function app() {
+  var logged_in = (new cljs.core.Keyword(null, "logged-in", "logged-in", 3524439234)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, reagent_tutorial.core.auth));
+  return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div", "div", 1014003715), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "id", "id", 1013907597), "account"], null), cljs.core.truth_(logged_in) ? reagent_tutorial.core.logout_form.call(null) : reagent_tutorial.core.login_form.call(null)], null);
 };
 reagent_tutorial.core.start = function start() {
-  return reagent.core.render_component.call(null, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.contact_list], null), document.getElementById("root"));
+  return reagent.core.render_component.call(null, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent_tutorial.core.app], null), document.getElementById("root"));
 };
